@@ -1,0 +1,36 @@
+{% extends 'base.html' %}
+
+{% block title %}Home - My Landing Page{% endblock %}
+
+{% block content %}
+<!-- Hero Section -->
+<div class="p-5 mb-4 text-white rounded-3" style="background-image: url('https://images.pexels.com/photos/1000445/pexels-photo-1000445.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1'); background-size: cover; background-position: center center; background-color: rgba(0, 0, 0, .5); background-blend-mode: color;">
+    <div class="container py-5 text-center">
+        <h1 class="display-4 fw-bold">Bem-vindo à Nossa Landing Page!</h1>
+        <p class="lead">Explore nosso blog e descubra os artigos mais recentes.</p>
+        <a class="btn btn-warning btn-lg" href="{% url 'blog_home' %}" role="button">Visite o Blog</a>
+    </div>
+</div>
+
+<!-- Recent Posts Section -->
+<div class="container">
+    <h2 class="text-center mb-5">Posts Recentes</h2>
+    <div class="row">
+        {% for post in latest_posts %}
+            <div class="col-md-4 mb-4">
+                <div class="card h-100 shadow-sm border-0">
+                    <div class="card-body">
+                        <h5 class="card-title">{{ post.title }}</h5>
+                        <p class="card-text">{{ post.content|truncatewords:20 }}</p>
+                    </div>
+                    <div class="card-footer bg-transparent border-top-0">
+                        <a href="{% url 'post_detail' slug=post.slug %}" class="btn btn-outline-warning w-100">
+                            <i class="bi bi-arrow-right"></i> Leia mais
+                        </a>
+                    </div>
+                </div>
+            </div>
+        {% endfor %}
+    </div>
+</div>
+{% endblock %}

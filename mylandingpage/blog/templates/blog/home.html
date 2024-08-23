@@ -1,0 +1,21 @@
+{% extends 'base.html' %}
+
+{% block title %}Blog - My Landing Page{% endblock %}
+
+{% block content %}
+<div class="container">
+    <h1 class="text-center mb-5">Blog</h1>
+    <div class="list-group">
+        {% for post in posts %}
+            <a href="{% url 'post_detail' slug=post.slug %}" class="list-group-item list-group-item-action mb-3 p-4 shadow-sm rounded bg-white border-0">
+                <h5 class="mb-1">{{ post.title }}</h5>
+                <p class="mb-1 text-muted">{{ post.content|truncatewords:20 }}</p>
+                <small>Publicado em: {{ post.created_at }}</small>
+                <div class="float-end">
+                    <i class="bi bi-arrow-right-circle-fill"></i>
+                </div>
+            </a>
+        {% endfor %}
+    </div>
+</div>
+{% endblock %}
